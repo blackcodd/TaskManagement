@@ -6,33 +6,13 @@ This project demonstrates modern DevOps lifecycle practices, including Docker co
 
 ---
 
-![Banner](https://drive.google.com/file/d/1ChKtMJZmIDb-lMo-m_hPsUe4nM1uTXFl/view?usp=sharing)
+![DevOps Task Manager](./Docs/Images/Frontend%20deshboard.png)
 
 ## 🌐 Live Demo
 
 [![Live App Banner](https://img.shields.io/badge/Live%20Demo-Render-brightgreen?style=for-the-badge&logo=render)](https://taskmanagement-kbvy.onrender.com)
 
 🔗 **Live Application URL:** [https://taskmanagement-kbvy.onrender.com](https://taskmanagement-kbvy.onrender.com)
-
----
-
-## 📸 Screenshots
-
-# <!--
-
-🖼️ IMAGE INSERTION INSTRUCTIONS:
-Replace the placeholder image URLs below with your actual screenshots.
-
-1. Put your image files in a folder named `docs/` inside your project root.
-2. # Link them like `![Dashboard](./docs/dashboard.png)`.
-   -->
-
-### 🖥️ Application Dashboard
-
-![DevOps Task Manager Dashboard](https://via.placeholder.com/1200x600/1e293b/6366f1?text=Insert+Dashboard+Screenshot+Here)  
-_Figure 1: Task Manager Dashboard showing real-time task stats, creation form, and interactive task cards._
-
-<br/>
 
 ### 🐳 Docker & Cloud Deployment
 
@@ -147,7 +127,7 @@ dotnet restore
 dotnet run
 ```
 
-_Backend API will run locally at `http://localhost:5080` (or `http://localhost:5000`)._
+_Backend API will run locally at `http://localhost:5080`_
 
 #### Frontend Setup
 

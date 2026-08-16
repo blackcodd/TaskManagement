@@ -5,9 +5,9 @@ export default function Header() {
     <header className="header">
       <div className="logo-container">
         <span className="logo-icon">📋</span>
-        <h1>DevOps Task Manager</h1>
+        <h1>Task Manager</h1>
       </div>
-      <p className="subtitle">Manage tasks efficiently with modern DevOps practices</p>
+      <p className="subtitle">Manage tasks efficiently</p>
     </header>
   );
 }

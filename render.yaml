@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: devops-task-manager-api
+    runtime: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production

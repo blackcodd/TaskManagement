@@ -1,77 +1,130 @@
-# DevOps Task Manager
+# 🚀 DevOps Task Manager
 
-A production-ready full-stack Task Manager application built with **React**, **Vite**, **ASP.NET Core Web API**, and **SQLite**, designed to demonstrate modern DevOps practices including Docker containerization and GitHub Actions CI/CD.
+A production-ready, containerized full-stack Task Management application built with **React (Vite)**, **ASP.NET Core 8 Web API**, **SQLite**, and **Docker**.
 
----
-
-## 🚀 Features
-
-- **Task Management**: Create, view, mark as complete/pending, and delete tasks.
-- **Real-time Statistics**: Live dashboard cards for Total, Completed, and Pending tasks.
-- **Input Validation**: Backend and frontend validation for required title and non-empty inputs.
-- **RESTful API**: ASP.NET Core API with proper HTTP status codes (`200`, `201`, `204`, `400`, `404`).
-- **Persistent Data**: SQLite database with Docker persistent volume storage.
-- **Health Monitoring**: Dedicated health check endpoint at `/api/health`.
+This project demonstrates modern DevOps lifecycle practices, including Docker containerization, cloud deployment, environment separation, and GitHub Actions CI/CD pipelines.
 
 ---
 
-## 🏗️ Architecture
+![Banner](https://drive.google.com/file/d/1ChKtMJZmIDb-lMo-m_hPsUe4nM1uTXFl/view?usp=sharing)
+
+## 🌐 Live Demo
+
+[![Live App Banner](https://img.shields.io/badge/Live%20Demo-Render-brightgreen?style=for-the-badge&logo=render)](https://taskmanagement-kbvy.onrender.com)
+
+🔗 **Live Application URL:** [https://taskmanagement-kbvy.onrender.com](https://taskmanagement-kbvy.onrender.com)
+
+---
+
+## 📸 Screenshots
+
+# <!--
+
+🖼️ IMAGE INSERTION INSTRUCTIONS:
+Replace the placeholder image URLs below with your actual screenshots.
+
+1. Put your image files in a folder named `docs/` inside your project root.
+2. # Link them like `![Dashboard](./docs/dashboard.png)`.
+   -->
+
+### 🖥️ Application Dashboard
+
+![DevOps Task Manager Dashboard](https://via.placeholder.com/1200x600/1e293b/6366f1?text=Insert+Dashboard+Screenshot+Here)  
+_Figure 1: Task Manager Dashboard showing real-time task stats, creation form, and interactive task cards._
+
+<br/>
+
+### 🐳 Docker & Cloud Deployment
+
+![Render Cloud Deployment](https://via.placeholder.com/1200x500/0f172a/38bdf8?text=Insert+Render+Deployment+Screenshot+Here)  
+_Figure 2: Live Render Web Services hosting containerized ASP.NET Core API and Nginx Frontend._
+
+---
+
+## ✨ Features
+
+- **Task Lifecycle Management**: Create, edit, complete/undo, and delete tasks.
+- **Real-Time Dashboard Analytics**: Live stat counters tracking total, completed, and pending tasks.
+- **Input Validation**: Client-side and server-side validation for required titles and non-empty inputs.
+- **RESTful API**: ASP.NET Core 8 Web API following REST standards with HTTP status codes (`200`, `201`, `204`, `400`, `404`).
+- **Persistent Storage**: SQLite database with automated EF Core migration and Docker persistent volume support.
+- **Health Checks**: Endpoint at `/api/health` for uptime monitoring and container orchestration health checks.
+- **Production Containerization**: Multi-stage Docker builds for minimal container sizes and fast startup times.
+
+---
+
+## 🏗️ System Architecture
 
 ```text
-Browser / Client
-      │
-      ▼
-Frontend Container (Nginx / React SPA)  ── Port 3000
-      │ (REST API)
-      ▼
-Backend Container (ASP.NET Core Web API) ── Port 5000
-      │
-      ▼
-SQLite Persistent Volume (/data/tasks.db)
+               ┌─────────────────────────────────────────┐
+               │           User Web Browser              │
+               └────────────────────┬────────────────────┘
+                                    │ (HTTP / REST API)
+                                    ▼
+               ┌─────────────────────────────────────────┐
+               │    Frontend Container (Nginx / SPA)     │
+               │               Port 80 / 3000            │
+               └────────────────────┬────────────────────┘
+                                    │ (CORS / HTTP Requests)
+                                    ▼
+               ┌─────────────────────────────────────────┐
+               │  Backend Container (ASP.NET Core 8 API)  │
+               │               Port 5000                 │
+               └────────────────────┬────────────────────┘
+                                    │ (EF Core 8)
+                                    ▼
+               ┌─────────────────────────────────────────┐
+               │    SQLite Persistent Storage Volume     │
+               │               (/data/tasks.db)          │
+               └─────────────────────────────────────────┘
 ```
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: React 18, Vite, JavaScript, CSS (Vanilla Design Tokens)
-- **Backend**: ASP.NET Core 8 Web API, C#
-- **Database**: SQLite with Entity Framework Core 8
-- **DevOps & Infrastructure**: Docker, Docker Compose, Nginx, Git, GitHub Actions
+| Layer                | Technology              | Details                                                 |
+| -------------------- | ----------------------- | ------------------------------------------------------- |
+| **Frontend**         | React 18, Vite          | JavaScript, Vanilla Design Tokens, Responsive UX        |
+| **Backend**          | ASP.NET Core 8          | C#, Web API Controllers, Entity Framework Core 8        |
+| **Database**         | SQLite                  | Automatic database creation and EF Core migrations      |
+| **Server / Proxy**   | Nginx                   | High-performance web server serving React static assets |
+| **Containerization** | Docker & Docker Compose | Multi-stage Dockerfiles for optimized production builds |
+| **Cloud Hosting**    | Render                  | Free Web Services for containerized full-stack hosting  |
+| **CI/CD**            | GitHub Actions          | Automated build & compile checks on every push          |
 
 ---
 
-## 📁 Project Structure
+## 📁 Directory Structure
 
 ```text
 devops-task-manager/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/   # Header, Statistics, TaskForm, TaskItem, TaskList
-│   │   ├── services/     # api.js helper service
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── public/
-│   ├── nginx.conf
-│   ├── Dockerfile
-│   ├── package.json
-│   └── vite.config.js
+│   │   ├── services/     # api.js REST API client service
+│   │   ├── App.jsx       # Main App component
+│   │   ├── main.jsx      # React DOM entrypoint
+│   │   └── index.css     # Design tokens and custom CSS styling
+│   ├── public/           # Static public assets
+│   ├── nginx.conf        # Nginx configuration for SPA routing
+│   ├── Dockerfile        # Multi-stage Node + Nginx Dockerfile
+│   ├── package.json      # Dependencies and scripts
+│   └── vite.config.js    # Vite build configuration
 ├── backend/
 │   ├── Controllers/      # TasksController, HealthController
-│   ├── Data/             # AppDbContext.cs
-│   ├── DTOs/             # TaskDtos.cs
-│   ├── Models/           # TaskItem.cs
-│   ├── Program.cs
-│   ├── appsettings.json
-│   └── Dockerfile
+│   ├── Data/             # AppDbContext.cs (EF Core DB Context)
+│   ├── DTOs/             # TaskDtos.cs (Request/Response Transfer Objects)
+│   ├── Models/           # TaskItem.cs (Domain Model)
+│   ├── Program.cs        # Middleware & service setup
+│   ├── appsettings.json  # Configuration file
+│   └── Dockerfile        # Multi-stage .NET 8 Dockerfile
 ├── .github/
-│   └── workflows/
-│       └── ci.yml        # CI Pipeline for Frontend & Backend
-├── docker-compose.yml
-├── .gitignore
-├── .env.example
-└── README.md
+│   └── workflows/        # GitHub Actions CI workflow
+├── docker-compose.yml    # Full-stack local multi-container orchestration
+├── render.yaml           # Render Cloud Blueprint deployment spec
+├── .env.example          # Environment variables template
+└── README.md             # Project documentation
 ```
 
 ---
@@ -79,96 +132,91 @@ devops-task-manager/
 ## 💻 Local Development Setup
 
 ### Prerequisites
-- Node.js (v18+)
-- .NET 8 SDK
-- Git
 
-### 1. Run Backend locally
+- [Node.js (v18+)](https://nodejs.org/)
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) _(Optional for container run)_
+
+### 1. Manual Local Execution
+
+#### Backend Setup
+
 ```bash
 cd backend
 dotnet restore
 dotnet run
 ```
-Backend will run at `http://localhost:5000`.
 
-### 2. Run Frontend locally
+_Backend API will run locally at `http://localhost:5080` (or `http://localhost:5000`)._
+
+#### Frontend Setup
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Frontend will run at `http://localhost:5173`.
+
+_Frontend React App will run locally at `http://localhost:5173`._
 
 ---
 
-## 🐳 Docker Deployment
+### 2. Running with Docker Compose (Recommended)
 
-To build and launch the entire application with Docker Compose:
+To launch both frontend and backend in isolated Docker containers with a single command:
 
 ```bash
-# Build and run containers in detached mode
+# Build and run containers in background
 docker compose up -d --build
 
-# Check running containers
-docker compose ps
-
-# View logs
+# View container logs
 docker compose logs -f
 
 # Stop containers
 docker compose down
 ```
 
-Access:
-- **Frontend**: http://localhost:3000
-- **Backend Health**: http://localhost:5000/api/health
-- **Backend API**: http://localhost:5000/api/tasks
+Access points:
+
+- **Frontend App**: `http://localhost:3000`
+- **Backend API**: `http://localhost:5000/api/tasks`
+- **Health Check**: `http://localhost:5000/api/health`
 
 ---
 
-## ⚙️ Environment Variables
+## ☁️ Cloud Deployment Guide (Render Free Tier)
 
-Copy `.env.example` to create local environment overrides:
+This application is configured for seamless deployment on **Render**:
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `VITE_API_URL` | Frontend API backend endpoint | `http://localhost:5000` |
-| `ASPNETCORE_ENVIRONMENT` | Backend environment | `Production` |
-| `ConnectionStrings__DefaultConnection` | SQLite Connection String | `Data Source=/data/tasks.db` |
+1. **Deploy Backend (Docker Web Service)**:
+   - Create a Web Service on Render from your GitHub repo.
+   - Set **Root Directory** to `backend`.
+   - Set **Runtime** to `Docker`.
+   - Set **Instance Type** to `Free`.
+   - Copy the deployed live backend URL (e.g. `https://devops-task-manager-api.onrender.com`).
 
----
-
-## 📡 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/health` | Health check endpoint |
-| `GET` | `/api/tasks` | Get all tasks |
-| `GET` | `/api/tasks/{id}` | Get task by ID |
-| `POST` | `/api/tasks` | Create a task |
-| `PUT` | `/api/tasks/{id}` | Update title, description, or status |
-| `DELETE` | `/api/tasks/{id}` | Delete a task |
+2. **Deploy Frontend (Docker Web Service)**:
+   - Create a second Web Service on Render from the same GitHub repo.
+   - Set **Root Directory** to `frontend`.
+   - Set **Runtime** to `Docker`.
+   - Set Environment Variable: `VITE_API_URL` = `https://<your-backend-url>.onrender.com`.
+   - Select `Free` instance and deploy!
 
 ---
 
-## 🤖 GitHub Actions CI/CD
+## 📡 REST API Documentation
 
-The repository includes a GitHub Actions pipeline (`.github/workflows/ci.yml`) that triggers on push and pull requests to `main`:
-1. **Backend Job**: Sets up .NET 8, restores packages, and compiles the ASP.NET Core project.
-2. **Frontend Job**: Sets up Node 22, installs npm dependencies, and runs `npm run build`.
+| Method   | Endpoint          | Description                  | Sample Request / Response                               |
+| -------- | ----------------- | ---------------------------- | ------------------------------------------------------- |
+| `GET`    | `/api/health`     | Service health status        | `{"status": "healthy"}`                                 |
+| `GET`    | `/api/tasks`      | Get all tasks                | `[{"id": 1, "title": "Buy groceries", ...}]`            |
+| `GET`    | `/api/tasks/{id}` | Get task by ID               | `{"id": 1, "title": "Buy groceries"}`                   |
+| `POST`   | `/api/tasks`      | Create a new task            | Body: `{"title": "New Task", "description": "Details"}` |
+| `PUT`    | `/api/tasks/{id}` | Update task details / status | Body: `{"title": "Updated", "isCompleted": true}`       |
+| `DELETE` | `/api/tasks/{id}` | Delete task by ID            | Returns `204 No Content`                                |
 
 ---
 
-## 🌐 Live Server Deployment Guide
+## 🛡️ License
 
-To deploy to a Linux VPS (e.g. AWS EC2, DigitalOcean, Hetzner):
-1. SSH into your VPS with Docker & Docker Compose installed.
-2. Clone this repository:
-   ```bash
-   git clone <YOUR_GITHUB_REPO_URL>
-   cd devops-task-manager
-   ```
-3. Run with Docker Compose:
-   ```bash
-   docker compose up -d --build
-   ```
+This project is open-source and available under the [MIT License](LICENSE).
